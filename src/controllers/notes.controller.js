@@ -19,12 +19,15 @@ export const createNote = async (req, res) => {
 export const getNotes = async (req, res) => {
   const { userId } = req.params;
 
-  const result = await pool.query(
+  try{const result = await pool.query(
     "SELECT * FROM notes WHERE user_id=$1 ORDER BY created_at DESC",
     [userId]
   );
 
   res.json(result.rows);
+}catch(e){
+  res.status(500).json({message: e.message});
+}
 };
 
 export const getNoteById = async (req, res) => {

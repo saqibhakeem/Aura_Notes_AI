@@ -33,7 +33,7 @@ export const generateSummary = async (req, res) => {
       [noteId, summaryText]
     );
 
-    res.json(result.rows[0]);
+    res.status(201).json(result.rows[0]);
 
   } catch (err) {
     console.error(err);
@@ -46,7 +46,7 @@ export const generateQuiz = async (req, res) => {
 
   try {
     const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gemini-flash-2.5",
       messages: [
         {
           role: "system",
