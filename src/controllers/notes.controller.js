@@ -2,13 +2,18 @@ import pool from "../config/db.js";
 
 export const createNote = async (req, res) => {
   const { userId, title, content } = req.body;
-
+  try{
   const result = await pool.query(
     "INSERT INTO notes(user_id,title,content) VALUES($1,$2,$3) RETURNING *",
     [userId, title, content]
   );
 
   res.status(201).json(result.rows[0]);
+}catch(e){
+
+  res.status(500).json({message: e.message})
+
+}
 };
 
 export const getNotes = async (req, res) => {
