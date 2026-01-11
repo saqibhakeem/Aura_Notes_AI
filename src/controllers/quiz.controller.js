@@ -33,10 +33,10 @@ export const getQuizWithQuestions = async (req, res) => {
       [quizId]
     );
 
-    res.json({
-      quiz: quizRes.rows[0],
-      questions: questionsRes.rows
-    });
+    res.json(
+      
+      questionsRes.rows
+    );
 
   } catch (err) {
     console.error(err);
